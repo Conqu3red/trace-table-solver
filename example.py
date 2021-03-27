@@ -1,4 +1,4 @@
-from tracker import *
+from tracker import Tracker, VarContainer
 
 
 tracker = Tracker()
@@ -20,4 +20,4 @@ _print(t.turns)
 _print(t.x)
 
 
-tracker.displayTraceTable()
+print(tracker.displayTraceTable())

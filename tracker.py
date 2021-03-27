@@ -25,7 +25,7 @@ class Tracker:
         data[self.line] = value
 
         self.values[name] = data
-    def displayTraceTable(self, variables: List[str] = None):
+    def displayTraceTable(self, variables: List[str] = None) -> str:
         headers = list(self.values.keys())
         if variables:
             headers = variables
@@ -38,4 +38,4 @@ class Tracker:
             for h in headers:
                 row.append(self.values[h].get(i, ""))
             table.append(row)
-        print(tabulate(table, headers=headers, tablefmt="psql"))
+        return tabulate(table, headers=headers, tablefmt="psql")
