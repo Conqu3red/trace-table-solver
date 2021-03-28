@@ -14,3 +14,17 @@ t.a = 2
 
 print(tracker.displayTraceTable()) # display trace table
 ```
+
+An alternative way to do this using the trace decorator:
+```python
+from tracker import Tracker, trace
+t = Tracker(compact=True)
+
+@trace(["a", "b"], t, displayOnComplete=True)
+def traced_function():
+    a = 0
+    b = 1
+    a = 2
+
+traced_function()
+```
