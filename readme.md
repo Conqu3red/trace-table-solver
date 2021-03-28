@@ -27,4 +27,9 @@ def traced_function():
     a = 2
 
 traced_function()
+# Outputs:
+# |   a | b   |
+# |-----|-----|
+# |   0 | 1   |
+# |   2 |     |
 ```
