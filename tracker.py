@@ -1,5 +1,6 @@
 from tabulate import tabulate
 from typing import *
+from collections.abc import Callable
 
 class VarContainer:
     def __init__(self, onchange):
@@ -11,16 +12,18 @@ class VarContainer:
         super(VarContainer, self).__setattr__(name, value)
 
 class Tracker:
-    def __init__(self):
+    def __init__(self, compact=False):
         self.values = {}
         self.line = 0
+        self.compact = compact
     
     def onchange(self, name, value):
         #print(f"{name} -> {value}")
         data: dict = self.values.get(name, {})
         
         #while self.line in data.keys():
-        self.line += 1
+        if data.get(self.line) != None or not self.compact:
+            self.line += 1
         
         data[self.line] = value
 
