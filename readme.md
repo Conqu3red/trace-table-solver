@@ -17,10 +17,9 @@ print(tracker.displayTraceTable()) # display trace table
 
 An alternative way to do this using the trace decorator:
 ```python
-from tracker import Tracker, trace
-t = Tracker(compact=True)
+from tracker import trace
 
-@trace(["a", "b"], t, displayOnComplete=True)
+@trace(["a", "b"], displayOnComplete=True, trackerArguments={"compact": True})
 def traced_function():
     a = 0
     b = 1

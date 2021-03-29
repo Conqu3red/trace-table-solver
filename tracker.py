@@ -34,13 +34,18 @@ class Tracker:
         if variables:
             headers = variables
         
-        maxLine = max([max(l.keys()) for l in self.values.values()])
+        maxLine = 0
+        for v in self.values.values():
+            for line in v.keys():
+                if line > maxLine:
+                    maxLine = line
+        
         
         table = []
         for i in range(maxLine+1):
             row = []
             for h in headers:
-                row.append(self.values[h].get(i, ""))
+                row.append(self.values.get(h, {}).get(i, ""))
             table.append(row)
         return tabulate(table, headers=headers, tablefmt=tablefmt)
 
@@ -54,10 +59,13 @@ def arg_decorator(fn):
     return wrapped_decorator
 
 @arg_decorator
-def trace(function, targets, tracker: Tracker, displayOnComplete=False):
+def trace(function, targets, displayOnComplete=False, trackerArguments: Dict = None):
+    if not trackerArguments:
+        trackerArguments = {}
     if targets == None:
         targets = []
     def wrapper(*args, **kwargs):
+        tracker = Tracker(**trackerArguments)
         def tracer(frame, event, arg = None):
             code = frame.f_code
             line_no = frame.f_lineno
