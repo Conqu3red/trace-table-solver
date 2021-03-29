@@ -32,3 +32,19 @@ traced_function()
 # |   0 | 1   |
 # |   2 |     |
 ```
+
+another alternative:
+```python
+from tracker import Tracer
+
+with Tracer(["a","b","c"], compact=True):
+    # code must be inside a function for variables to be logged
+    def TotalOut(a, b):
+        c = a + b
+        while a < c:
+            a = a + 1
+            b = b - a
+        return b 
+    
+    TotalOut(3, 4)
+```
